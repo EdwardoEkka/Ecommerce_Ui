@@ -66,9 +66,9 @@ async function bookProduct(productId) {
     });
     const data=await response.json();
     if (response.ok) {
-      console.log(data.message);
+      notification(data.message);
     } else {
-      console.log(data.message);
+      notification(data.message);
     }
   } catch (error) {
     console.error("Error:", error);

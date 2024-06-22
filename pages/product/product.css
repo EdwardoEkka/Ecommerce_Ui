@@ -1,0 +1,12 @@
+.single-product{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-container{
+    width: 200px;
+}
+
+.product-container img{
+    width: 100%;
+}

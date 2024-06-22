@@ -1,0 +1,27 @@
+
+.products-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:10px;
+    flex-wrap: wrap;
+}
+
+.product-container{
+    background-color: rgb(40, 51, 165);
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px;
+    height:250px;
+    padding-top:10px; 
+    padding-bottom: 10px ;
+    color: white;
+    padding: 10px;
+}
+
+.product-container img{
+    width: 60%;
+    object-fit: cover;
+}

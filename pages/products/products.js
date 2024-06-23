@@ -1,4 +1,4 @@
-
+Navbar("../../index.html", "./products.html", "../cart/cart.html", "../account/account.html");
 
 authenticateUser();
 
@@ -19,19 +19,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const imageCon = document.createElement("div");
         const Image = document.createElement("img");
         // Image.src = "../../assets/Postman.png";
-        Image.src =product.image;
+        Image.src = product.image;
         Image.alt = product.title;
         imageCon.className = "imageContainer";
         imageCon.appendChild(Image);
-        
-        const contentCon=document.createElement('div');
-        contentCon.className='content-container';
+
+        const contentCon = document.createElement("div");
+        contentCon.className = "content-container";
         const title = document.createElement("div");
-        title.className='title';
+        title.className = "title";
         title.innerText = product.title;
-        const price=document.createElement('div');
-        price.innerText=`$${product.price}`;
-        price.className='price';
+        const price = document.createElement("div");
+        price.innerText = `$${product.price}`;
+        price.className = "price";
         contentCon.appendChild(title);
         contentCon.appendChild(price);
         product_con.appendChild(imageCon);

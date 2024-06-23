@@ -1,12 +1,12 @@
+Navbar("../../index.html", "../products/products.html", "./product.html", "../account/account.html");
+
 authenticateUser();
 
 const currentPageUrl = window.location.href;
 const urlObject = new URL(currentPageUrl);
 const params = new URLSearchParams(urlObject.search);
 const page = params.get("id");
-const user=JSON.parse(sessionStorage.getItem('user'));
-
-
+const user = JSON.parse(sessionStorage.getItem("user"));
 
 document.addEventListener("DOMContentLoaded", function () {
   const ProductsContainer = document.querySelector(".single-product");
@@ -18,28 +18,28 @@ document.addEventListener("DOMContentLoaded", function () {
       const product_con = document.createElement("div");
       product_con.className = "product-container";
 
-      const imageCon=document.createElement('div');
-      imageCon.className="image-container"
+      const imageCon = document.createElement("div");
+      imageCon.className = "image-container";
       const Image = document.createElement("img");
       // Image.src = '../../assets/Postman.png';
       Image.src = product.image;
       Image.alt = product.title;
       imageCon.appendChild(Image);
-      const Content=document.createElement('div');
-      Content.className="content-container";
+      const Content = document.createElement("div");
+      Content.className = "content-container";
       const list_item_c1 = document.createElement("div");
       list_item_c1.innerText = product.title;
-      list_item_c1.className='title';
+      list_item_c1.className = "title";
       const list_item_c2 = document.createElement("div");
       list_item_c2.innerText = product.description;
-      list_item_c2.className='description';
+      list_item_c2.className = "description";
       const list_item_c3 = document.createElement("div");
       list_item_c3.innerText = `Price: $${product.price}`;
-      list_item_c3.className='price';
+      list_item_c3.className = "price";
       const bookButton = document.createElement("button");
-      bookButton.className='book-button';
+      bookButton.className = "book-button";
       bookButton.innerText = "Book Product";
-      bookButton.addEventListener("click", function() {
+      bookButton.addEventListener("click", function () {
         bookProduct(product.id);
       });
 
@@ -58,27 +58,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-
-
 async function bookProduct(productId) {
-  const formData={
-    productId:productId,
-    userId:user.id,
-    username:user.username,
-  }
+  const formData = {
+    productId: productId,
+    userId: user.id,
+    username: user.username,
+  };
   try {
-    var response = await fetch("https://ecommerce-server-wdin.onrender.com/addProduct", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-    const data=await response.json();
+    var response = await fetch(
+      "https://ecommerce-server-wdin.onrender.com/addProduct",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    );
+    const data = await response.json();
     if (data.ok) {
-      notification(data.message,data.ok);
+      notification(data.message, data.ok);
     } else {
-      notification(data.message,data.ok);
+      notification(data.message, data.ok);
     }
   } catch (error) {
     console.error("Error:", error);
@@ -87,12 +88,15 @@ async function bookProduct(productId) {
 
 async function getCart(userId) {
   try {
-    var response = await fetch(`https://ecommerce-server-wdin.onrender.com/getCart/${userId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
+    var response = await fetch(
+      `https://ecommerce-server-wdin.onrender.com/getCart/${userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
-    });
+    );
     console.log(response);
     const data = await response.json();
     if (response.ok) {

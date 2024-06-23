@@ -1,38 +1,39 @@
+authenticateUser();
 const user = JSON.parse(sessionStorage.getItem('user'));
 const cartContainer = document.querySelector(".cart");
 
 function FetchProduct(productId) {
+  // fetch(`https://ecommerce-server-wdin.onrender.com/getSingleProduct/${productId}`)
   fetch(`https://fakestoreapi.com/products/${productId}`)
     .then((res) => res.json())
     .then((product) => {
       const product_con = document.createElement("div");
       product_con.className = "product-container";
-      product_con.dataset.productId = productId;  // Add product ID to dataset
-
-      const list_item0 = document.createElement("img");
-      list_item0.src = product.image;
-      list_item0.alt = product.title;
-
-      const list_item1 = document.createElement("div");
-      list_item1.innerText = product.title;
-
-      const list_item2 = document.createElement("div");
-      list_item2.innerText = product.description;
-
-      const list_item3 = document.createElement("div");
-      list_item3.innerText = `$${product.price}`;
-
+      product_con.dataset.productId = productId; 
+      const imageCon = document.createElement("div");
+      const Image=document.createElement('img');
+      // Image.src = '../../assets/Postman.png';
+      Image.src = product.image;
+      Image.alt = product.title;
+      imageCon.className="imageContainer";
+      imageCon.appendChild(Image);
+      const contentCon=document.createElement('div');
+      contentCon.className="contentContainer";
+      const title = document.createElement("div");
+      title.innerText = product.title;
+      title.className='title';
+      const price = document.createElement("div");
+      price.className='price';
+      price.innerText = `Price:$${product.price}`;
       const deleteButton = document.createElement("button");
       deleteButton.innerText = "Delete";
       deleteButton.addEventListener("click", () => deleteProduct(productId, product_con));
-
-      product_con.appendChild(list_item0);
-      product_con.appendChild(list_item1);
-      product_con.appendChild(list_item2);
-      product_con.appendChild(list_item3);
-      product_con.appendChild(deleteButton);
+      contentCon.appendChild(title);
+      contentCon.appendChild(price);
+      contentCon.appendChild(deleteButton);
+      product_con.appendChild(imageCon);
+      product_con.appendChild(contentCon);
       cartContainer.appendChild(product_con);
-
       product_con.style.cursor = "pointer";
     })
     .catch((error) => {
@@ -42,7 +43,7 @@ function FetchProduct(productId) {
 
 async function deleteProduct(productId, productElement) {
   try {
-    const response = await fetch(`http://localhost:5000/deleteProduct`, {
+    const response = await fetch(`https://ecommerce-server-wdin.onrender.com/deleteProduct`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -50,12 +51,12 @@ async function deleteProduct(productId, productElement) {
       body: JSON.stringify({ userId: user.id, productId: productId })
     });
     const data = await response.json();
-    if (response.ok) {
+    if (data.ok) {
       // Remove product element from the DOM
       productElement.remove();
-      notification(data.message);
+      notification(data.message,data.ok);
     } else {
-      notification(data.message);
+      notification(data.message,data.ok);
     }
   } catch (error) {
     console.error("Error deleting the product:", error);
@@ -64,14 +65,14 @@ async function deleteProduct(productId, productElement) {
 
 async function getCart(userId) {
   try {
-    const response = await fetch(`http://localhost:5000/getCart/${userId}`, {
+    const response = await fetch(`https://ecommerce-server-wdin.onrender.com/getCart/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
       }
     });
     const data = await response.json();
-    if (response.ok) {
+    if (data.ok) {
       return data.data;
     } else {
       console.log(data.message);

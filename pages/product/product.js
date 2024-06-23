@@ -1,3 +1,5 @@
+authenticateUser();
+
 const currentPageUrl = window.location.href;
 const urlObject = new URL(currentPageUrl);
 const params = new URLSearchParams(urlObject.search);
@@ -9,38 +11,46 @@ const user=JSON.parse(sessionStorage.getItem('user'));
 document.addEventListener("DOMContentLoaded", function () {
   const ProductsContainer = document.querySelector(".single-product");
 
+  // fetch(`https://ecommerce-server-wdin.onrender.com/getSingleProduct/${page}`)
   fetch(`https://fakestoreapi.com/products/${page}`)
     .then((res) => res.json())
     .then((product) => {
       const product_con = document.createElement("div");
       product_con.className = "product-container";
 
-      const list_item0 = document.createElement("img");
-      list_item0.src = product.image;
-      list_item0.alt = product.title;
-
-      const list_item1 = document.createElement("div");
-      list_item1.innerText = product.title;
-
-      const list_item2 = document.createElement("div");
-      list_item2.innerText = product.description;
-
-      const list_item3 = document.createElement("div");
-      list_item3.innerText = `$${product.price}`;
-
+      const imageCon=document.createElement('div');
+      imageCon.className="image-container"
+      const Image = document.createElement("img");
+      // Image.src = '../../assets/Postman.png';
+      Image.src = product.image;
+      Image.alt = product.title;
+      imageCon.appendChild(Image);
+      const Content=document.createElement('div');
+      Content.className="content-container";
+      const list_item_c1 = document.createElement("div");
+      list_item_c1.innerText = product.title;
+      list_item_c1.className='title';
+      const list_item_c2 = document.createElement("div");
+      list_item_c2.innerText = product.description;
+      list_item_c2.className='description';
+      const list_item_c3 = document.createElement("div");
+      list_item_c3.innerText = `Price: $${product.price}`;
+      list_item_c3.className='price';
       const bookButton = document.createElement("button");
+      bookButton.className='book-button';
       bookButton.innerText = "Book Product";
       bookButton.addEventListener("click", function() {
         bookProduct(product.id);
       });
 
-      product_con.appendChild(list_item0);
-      product_con.appendChild(list_item1);
-      product_con.appendChild(list_item2);
-      product_con.appendChild(list_item3);
-      product_con.appendChild(bookButton);
-      ProductsContainer.appendChild(product_con);
+      Content.appendChild(list_item_c1);
+      Content.appendChild(list_item_c2);
+      Content.appendChild(list_item_c3);
+      Content.appendChild(bookButton);
 
+      product_con.appendChild(imageCon);
+      product_con.appendChild(Content);
+      ProductsContainer.appendChild(product_con);
       product_con.style.cursor = "pointer";
     })
     .catch((error) => {
@@ -57,7 +67,7 @@ async function bookProduct(productId) {
     username:user.username,
   }
   try {
-    var response = await fetch("http://localhost:5000/addProduct", {
+    var response = await fetch("https://ecommerce-server-wdin.onrender.com/addProduct", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -65,10 +75,10 @@ async function bookProduct(productId) {
       body: JSON.stringify(formData),
     });
     const data=await response.json();
-    if (response.ok) {
-      notification(data.message);
+    if (data.ok) {
+      notification(data.message,data.ok);
     } else {
-      notification(data.message);
+      notification(data.message,data.ok);
     }
   } catch (error) {
     console.error("Error:", error);
@@ -77,7 +87,7 @@ async function bookProduct(productId) {
 
 async function getCart(userId) {
   try {
-    var response = await fetch(`http://localhost:5000/getCart/${userId}`, {
+    var response = await fetch(`https://ecommerce-server-wdin.onrender.com/getCart/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

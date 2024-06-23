@@ -1,3 +1,5 @@
+getUserDetails();
+
 async function signUp() {
   var username = document.getElementById("username");
   var email = document.getElementById("email");
@@ -8,7 +10,7 @@ async function signUp() {
     password: password.value,
   };
   try {
-    var response = await fetch("http://localhost:5000/manual-sign_up", {
+    var response = await fetch("https://ecommerce-server-wdin.onrender.com/manual-sign_up", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -16,10 +18,10 @@ async function signUp() {
       body: JSON.stringify(form_data),
     });
     const data=await response.json();
-    if (response.ok) {
-      notification(data.message);
+    if (data.ok) {
+      notification(data.message,data.ok);
     } else {
-      notification(data.message);
+      notification(data.message,data.ok);
     }
   } catch (error) {
     console.error("Error:", error);

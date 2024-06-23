@@ -26,9 +26,9 @@ const Nav = document.querySelector('.navbar');
 
     // Create individual navigation links
     let links = [
-        { text: 'Home', href: '../index.html' },
-        { text: 'Shop', href: '../pages/products/products.html' },
-        { text: 'Cart', href: '../pages/cart/cart.html' },
+        { text: 'Home', href: '/index.html' },
+        { text: 'Shop', href: '/pages/products/products.html' },
+        { text: 'Cart', href: '/pages/cart/cart.html' },
         { text: 'Contact', href: '#' }
       ];
   

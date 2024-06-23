@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .then((products) => {
       products.forEach((product) => {
         const anchor = document.createElement("a");
-        anchor.href = `../products/products.html?id=${product.id}`;
+        anchor.href = `/pages/product/product.html?id=${product.id}`;
         anchor.style.textDecoration = "none";
 
         const product_con = document.createElement("div");

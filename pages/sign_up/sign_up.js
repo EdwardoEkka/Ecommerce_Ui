@@ -1,4 +1,4 @@
-getUserDetails();
+authenticateUser();
 
 async function signUp() {
   var username = document.getElementById("username");

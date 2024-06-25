@@ -10,7 +10,7 @@ const user = JSON.parse(sessionStorage.getItem("user"));
 const cartContainer = document.querySelector(".cart");
 
 function FetchProduct(productId) {
-  // fetch(`http://localhost:5000/getSingleProduct/${productId}`)
+  // fetch(`https://ecommerce-server-wdin.onrender.com/getSingleProduct/${productId}`)
     fetch(`https://fakestoreapi.com/products/${productId}`)
     .then((res) => res.json())
     .then((product) => {
@@ -52,7 +52,7 @@ function FetchProduct(productId) {
 
 async function deleteProduct(productId, productElement) {
   try {
-    const response = await fetch(`http://localhost:5000/deleteProduct`, {
+    const response = await fetch(`https://ecommerce-server-wdin.onrender.com/deleteProduct`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ async function deleteProduct(productId, productElement) {
 
 async function getCart(userId) {
   try {
-    const response = await fetch(`http://localhost:5000/getCart/${userId}`, {
+    const response = await fetch(`https://ecommerce-server-wdin.onrender.com/getCart/${userId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

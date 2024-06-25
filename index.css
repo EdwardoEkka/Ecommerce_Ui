@@ -1,7 +1,7 @@
 
 body{
     margin: 0;
-    font-family: 'Fredoka One', cursive;
+   font-family: 'Open Sans', sans-serif;
 }
 
 .hero{
@@ -119,10 +119,12 @@ body{
 
     .intro{
         flex-direction: column;
+        margin: 20px 20px;
     }
 
     .end{
         flex-direction: column-reverse;
+        margin: 20px 20px;
     }
     .intro-pic{
         width: 100%;

@@ -11,7 +11,7 @@ const user = JSON.parse(sessionStorage.getItem("user"));
 document.addEventListener("DOMContentLoaded", function () {
   const ProductsContainer = document.querySelector(".single-product");
 
-  //  fetch(`http://localhost:5000/getSingleProduct/${page}`)
+  //  fetch(`https://ecommerce-server-wdin.onrender.com/getSingleProduct/${page}`)
   fetch(`https://fakestoreapi.com/products/${page}`)
     .then((res) => res.json())
     .then((product) => {
@@ -66,7 +66,7 @@ async function bookProduct(productId){
       return;
     }
     try {
-      const response = await fetch(`http://localhost:5000/addProduct`, {
+      const response = await fetch(`https://ecommerce-server-wdin.onrender.com/addProduct`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

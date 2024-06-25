@@ -1,6 +1,6 @@
 async function authenticateUser() {
     try {
-      var response = await fetch("http://localhost:5000/user-details", {
+      var response = await fetch("https://ecommerce-server-wdin.onrender.com/user-details", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

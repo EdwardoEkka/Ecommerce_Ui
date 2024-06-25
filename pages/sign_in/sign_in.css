@@ -2,9 +2,23 @@
 
 body{
     margin:0;
-    
+    font-family: 'Open Sans', sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+    padding: 5px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 16px; 
+}
+.back-link div {
+    margin-left: 8px; 
+}
 .main-container{
     display: flex;
     align-items: center;

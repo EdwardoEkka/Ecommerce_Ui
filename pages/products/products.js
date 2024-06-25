@@ -5,7 +5,7 @@ authenticateUser();
 document.addEventListener("DOMContentLoaded", function () {
   const ProductsContainer = document.querySelector(".products-container");
 
-  // fetch("http://localhost:5000/getAllProducts")
+  // fetch("https://ecommerce-server-wdin.onrender.com/getAllProducts")
   fetch(`https://fakestoreapi.com/products`)
     .then((res) => res.json())
     .then((products) => {

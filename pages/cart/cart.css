@@ -1,5 +1,8 @@
+
 body{
 margin: 0;
+    font-family: 'Fredoka One', cursive;
+
 }
 
 .main-c{
@@ -15,12 +18,13 @@ gap: 10px;
 }
 
 .product-container{
-    max-width: 450px;
-    height: 200px;
+    width: 450px;
+    min-height: 200px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgb(180, 223, 223);
+    border: 1.5px solid black;
+    border-radius: 5px;
 }
 
 .imageContainer{

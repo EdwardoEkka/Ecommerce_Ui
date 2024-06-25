@@ -1,12 +1,17 @@
-Navbar("../../index.html", "../products/products.html", "./cart.html", "../account/account.html");
+Navbar(
+  "../../index.html",
+  "../products/products.html",
+  "./cart.html",
+  "../account/account.html"
+);
 
 authenticateUser();
 const user = JSON.parse(sessionStorage.getItem("user"));
 const cartContainer = document.querySelector(".cart");
 
 function FetchProduct(productId) {
-  // fetch(`https://ecommerce-server-wdin.onrender.com/getSingleProduct/${productId}`)
-  fetch(`https://fakestoreapi.com/products/${productId}`)
+  // fetch(`http://localhost:5000/getSingleProduct/${productId}`)
+    fetch(`https://fakestoreapi.com/products/${productId}`)
     .then((res) => res.json())
     .then((product) => {
       const product_con = document.createElement("div");
@@ -14,7 +19,7 @@ function FetchProduct(productId) {
       product_con.dataset.productId = productId;
       const imageCon = document.createElement("div");
       const Image = document.createElement("img");
-      // Image.src = '../../assets/Postman.png';
+      // Image.src = "../../assets/Postman.png";
       Image.src = product.image;
       Image.alt = product.title;
       imageCon.className = "imageContainer";
@@ -47,16 +52,13 @@ function FetchProduct(productId) {
 
 async function deleteProduct(productId, productElement) {
   try {
-    const response = await fetch(
-      `https://ecommerce-server-wdin.onrender.com/deleteProduct`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: user.id, productId: productId }),
-      }
-    );
+    const response = await fetch(`http://localhost:5000/deleteProduct`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ userId: user.id, productId: productId }),
+    });
     const data = await response.json();
     if (data.ok) {
       // Remove product element from the DOM
@@ -72,15 +74,12 @@ async function deleteProduct(productId, productElement) {
 
 async function getCart(userId) {
   try {
-    const response = await fetch(
-      `https://ecommerce-server-wdin.onrender.com/getCart/${userId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const response = await fetch(`http://localhost:5000/getCart/${userId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await response.json();
     if (data.ok) {
       return data.data;
@@ -95,6 +94,11 @@ async function getCart(userId) {
 }
 
 async function loadCartProducts() {
+  if (!user) {
+    cartContainer.innerText="You need to be logged In.";
+    return;
+  }
+  cartContainer.innerHTML="";
   const idArray = await getCart(user.id);
   idArray.forEach((product) => {
     FetchProduct(product.productId);

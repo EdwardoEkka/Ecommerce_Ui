@@ -1,4 +1,4 @@
-Navbar("../../index.html", "../products/products.html", "./product.html", "../account/account.html");
+Navbar("../../index.html", "../products/products.html", "../cart/cart.html", "../account/account.html");
 
 authenticateUser();
 
@@ -11,7 +11,7 @@ const user = JSON.parse(sessionStorage.getItem("user"));
 document.addEventListener("DOMContentLoaded", function () {
   const ProductsContainer = document.querySelector(".single-product");
 
-  // fetch(`https://ecommerce-server-wdin.onrender.com/getSingleProduct/${page}`)
+  //  fetch(`http://localhost:5000/getSingleProduct/${page}`)
   fetch(`https://fakestoreapi.com/products/${page}`)
     .then((res) => res.json())
     .then((product) => {
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const imageCon = document.createElement("div");
       imageCon.className = "image-container";
       const Image = document.createElement("img");
-      // Image.src = '../../assets/Postman.png';
+      //  Image.src = '../../assets/Postman.png';
       Image.src = product.image;
       Image.alt = product.title;
       imageCon.appendChild(Image);
@@ -58,55 +58,28 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-async function bookProduct(productId) {
-  const formData = {
-    productId: productId,
-    userId: user.id,
-    username: user.username,
-  };
-  try {
-    var response = await fetch(
-      "https://ecommerce-server-wdin.onrender.com/addProduct",
-      {
+
+async function bookProduct(productId){
+  if(!user)
+    {
+      notification("You need to login first.",false);
+      return;
+    }
+    try {
+      const response = await fetch(`http://localhost:5000/addProduct`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ userId:user.id, username:user.username, productId:productId  }),
+      });
+      const data = await response.json();
+      if (data.ok) {
+        notification(data.message, data.ok);
+      } else {
+        notification(data.message, data.ok);
       }
-    );
-    const data = await response.json();
-    if (data.ok) {
-      notification(data.message, data.ok);
-    } else {
-      notification(data.message, data.ok);
+    } catch (error) {
+      console.error("Error adding to the cart:", error);
     }
-  } catch (error) {
-    console.error("Error:", error);
-  }
 }
-
-async function getCart(userId) {
-  try {
-    var response = await fetch(
-      `https://ecommerce-server-wdin.onrender.com/getCart/${userId}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
-    console.log(response);
-    const data = await response.json();
-    if (response.ok) {
-      console.log(data.data);
-    } else {
-      console.log(data.message);
-    }
-  } catch (error) {
-    console.error("Error:", error);
-  }
-}
-
-getCart(user.id);

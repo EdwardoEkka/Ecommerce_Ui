@@ -1,5 +1,8 @@
+
 body{
     margin: 0;
+    font-family: 'Fredoka One', cursive;
+    
 }
 
 .single-product{
@@ -33,7 +36,7 @@ body{
 }
 
 .book-button{
-    width: 100px;
+    max-width: 100px;
     border: none;
     background-color: rgb(49, 86, 234);
     color:white;

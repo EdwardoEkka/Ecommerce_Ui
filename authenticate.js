@@ -1,6 +1,6 @@
 async function authenticateUser() {
     try {
-      var response = await fetch("https://ecommerce-server-wdin.onrender.com/user-details", {
+      var response = await fetch("http://localhost:5000/user-details", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -8,7 +8,7 @@ async function authenticateUser() {
         }
       });
       const data = await response.json();
-      if (response.ok) {
+      if (data.ok) {
         console.log(data.message);
         sessionStorage.setItem('user',JSON.stringify(data.user));
       } else {

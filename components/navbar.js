@@ -5,7 +5,7 @@ function Navbar(home,shop,cart,account) {
   top_nav.className = "Top-nav";
   const logo = document.createElement("div");
   logo.className = "logo";
-  logo.textContent = "Shop-Wardo";
+  logo.textContent = "Wardo-Store";
 
   // Create menu button for mobile view
   const menuBtn = document.createElement("div");

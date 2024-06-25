@@ -10,7 +10,7 @@ async function signUp() {
     password: password.value,
   };
   try {
-    var response = await fetch("https://ecommerce-server-wdin.onrender.com/manual-sign_up", {
+    var response = await fetch("http://localhost:5000/manual-sign_up", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

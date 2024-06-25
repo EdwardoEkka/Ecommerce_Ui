@@ -5,20 +5,20 @@ authenticateUser();
 document.addEventListener("DOMContentLoaded", function () {
   const ProductsContainer = document.querySelector(".products-container");
 
-  // fetch("https://ecommerce-server-wdin.onrender.com/getAllProducts")
+  // fetch("http://localhost:5000/getAllProducts")
   fetch(`https://fakestoreapi.com/products`)
     .then((res) => res.json())
     .then((products) => {
       products.forEach((product) => {
         const anchor = document.createElement("a");
-        anchor.href = `/pages/product/product.html?id=${product.id}`;
+        anchor.href = `../product/product.html?id=${product.id}`;
         anchor.style.textDecoration = "none";
 
         const product_con = document.createElement("div");
         product_con.className = "product-container";
         const imageCon = document.createElement("div");
         const Image = document.createElement("img");
-        // Image.src = "../../assets/Postman.png";
+        //  Image.src = "../../assets/Postman.png";
         Image.src = product.image;
         Image.alt = product.title;
         imageCon.className = "imageContainer";

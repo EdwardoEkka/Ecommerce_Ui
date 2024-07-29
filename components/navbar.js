@@ -101,7 +101,7 @@ function Navbar(home,shop,cart,account) {
             align-items: center;
             width: 100%;
             position:absolute;
-            background-color:blue;
+            background-color:#2A3132;
             top:50px;
           }
   

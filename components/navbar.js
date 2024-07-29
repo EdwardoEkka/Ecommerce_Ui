@@ -51,7 +51,7 @@ function Navbar(home,shop,cart,account) {
         .navbar {
           width: 100%;
           height: 100px;
-          background-color: blue;
+          background-color:#2A3132;
           display: flex;
           justify-content: space-between;
           align-items: center;
